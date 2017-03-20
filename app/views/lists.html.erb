@@ -5,7 +5,7 @@
     <a href="/lists/<%= list.id %>/tasks">view tasks</a>
     <form action="/lists/<%= list.id %>" method="post">
       <input type="hidden" name="_method" value="delete">
-      <input type="submit" name="" value="DELETE">
+      <input class="btn btn-danger" type="submit" name="" value="DELETE">
     </form>
     <% end %>
   </li>

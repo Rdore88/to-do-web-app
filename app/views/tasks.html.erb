@@ -1,21 +1,39 @@
-<ul>
-  <% @tasks.each do |task| %>
-  <li>
-    <%= task["name"] %>
-    <% if task.completed_at %>
-        <b>COMPLETED</b>
-      <% end %>
-    <a href="/tasks/<%= task.id %>/edit">edit</a>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Completed</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <th>Complete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task["id"] %></td>
+      <td><%= task["name"] %></td>
+        <% if task.completed_at %>
+          <td>COMPLETED</td>
+          <% else %>
+          <td>ACTIVE</td>
+        <% end %>
+      <td><a href="/tasks/<%= task.id %>/edit">edit</a></td>
+      <td>
+        <form action="/tasks/<%= task.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input class="btn btn-danger" type="submit" name="" value="DELETE">
+        </form>
+      </td>
+      <td>
+        <form action="/tasks/<%= task.id %>/complete" method="post">
+          <input type="hidden" name="_method" value="get">
+          <input  type="submit" name="" value="Complete">
+        </form>
+      </td>
+    </tr>
+    <% end %>
 
-    <form action="/tasks/<%= task.id %>" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" name="" value="DELETE">
-    </form>
-
-    <form action="/tasks/<%= task.id %>/complete" method="post">
-      <input type="hidden" name="_method" value="get">
-      <input type="submit" name="" value="Complete">
-    </form>
-  </li>
-  <% end %>
-</ul>
+  </tbody>
+</table>
