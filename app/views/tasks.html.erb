@@ -1,0 +1,21 @@
+<ul>
+  <% @tasks.each do |task| %>
+  <li>
+    <%= task["name"] %>
+    <% if task.completed_at %>
+        <b>COMPLETED</b>
+      <% end %>
+    <a href="/tasks/<%= task.id %>/edit">edit</a>
+
+    <form action="/tasks/<%= task.id %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" name="" value="DELETE">
+    </form>
+
+    <form action="/tasks/<%= task.id %>/complete" method="post">
+      <input type="hidden" name="_method" value="get">
+      <input type="submit" name="" value="Complete">
+    </form>
+  </li>
+  <% end %>
+</ul>
